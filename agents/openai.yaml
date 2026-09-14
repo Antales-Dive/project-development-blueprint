@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Development Blueprint"
+  short_description: "Turn requirements and codebases into implementation-ready plans"
+  default_prompt: "Analyze these requirements and the available project context, then create an implementation-ready development blueprint."
