@@ -10,6 +10,7 @@ Use a directory of linked Markdown files when the project has multiple deployabl
 - Scope summary and document map
 - Implementation order and cross-document dependencies
 - Global assumptions, pending decisions, and risk summary
+- Teaching mode and decision explanation map
 - Requirement confirmation status and high-impact decisions
 - Master implementation brief and staged handoff map, when another coding model will implement
 
@@ -38,6 +39,7 @@ Use a directory of linked Markdown files when the project has multiple deployabl
 - Mermaid diagrams only where useful
 - Consumer ledger for every new component or abstraction
 - Alternatives and decision rationale
+- Teaching notes for consequential decisions: business decomposition, rationale, code location, and verification
 - Responsibility-complete but appropriately simple architecture explanation
 - Core module contracts: responsibility, non-responsibility, input, output, public interface, hidden internals, dependencies, extension points, run/test focus
 - Change-impact notes for likely future features
@@ -77,3 +79,6 @@ Use a directory of linked Markdown files when the project has multiple deployabl
 - Keep requirement, component, contract, data, and task IDs stable.
 - A task is not complete unless its files, dependencies, acceptance criteria, and verification evidence are named.
 - The index must allow a coding model to navigate from each requirement to architecture, contracts/data, tasks, and verification without guessing.
+
+
+

@@ -7,6 +7,8 @@ Use one file for a small, bounded project. Replace every bracketed placeholder b
 - Project:
 - Mode: Existing-project | Greenfield | Hybrid
 - Status and revision:
+- Repository revision and generation date:
+- Teaching mode: enabled | disabled
 - Goal:
 - Final product behavior:
 - Verdict: IMPLEMENTABLE | REDUCE_SCOPE | REVISE_DESIGN | NEEDS_EVIDENCE | NO_CHANGE_NEEDED
@@ -63,6 +65,10 @@ Include Mermaid only when it materially improves understanding.
 ### Core module contracts
 
 For each core module, include Responsibility, Non-responsibility, Input, Output, Public interface, Hidden internals, Dependencies, Extension points, and Run/test focus.
+
+### Teaching notes (when teaching mode is enabled)
+
+For each major requirement and design decision, explain business decomposition, design choice, rationale, code location, and verification method in 2–6 sentences.
 
 ### Change-impact notes
 
@@ -126,3 +132,6 @@ For each stage include goal, prerequisites, exact files, implementation constrai
 
 | Requirement/criterion | Evidence | Status |
 | --- | --- | --- |
+
+
+

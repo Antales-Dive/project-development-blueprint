@@ -19,15 +19,25 @@ Do not skip from a vague idea directly to implementation tasks. For an AI-powere
 
 For a new or materially ambiguous project, use a guided clarification loop. Ask one high-impact question at a time, preferably with a small set of meaningful choices explained in plain language. Skip questions already answered by the user or repository, do not repeat a question, and do not turn the process into a long questionnaire. When the remaining choices materially affect scope, architecture, safety, cost, compatibility, or acceptance, present a compact requirement confirmation draft before finalizing the blueprint.
 
+When the user wants to learn while the blueprint is being developed, enable **teaching mode**. Keep the blueprint authoritative, but add short explanations at each consequential decision using this pattern:
+
+- **Business decomposition**: how the business goal becomes actors, scenarios, rules, and acceptance criteria;
+- **Design decision**: the chosen boundary, data shape, flow, or technology;
+- **Why this design**: the evidence, trade-off, and rejected simpler or more complex option;
+- **Code location**: the exact file, function, route, schema, test, or configuration that realizes it;
+- **Verification method**: how a developer can prove the behavior and diagnose a failure.
+
+Use teaching mode only for decisions that materially affect behavior, maintainability, security, cost, or operations. Explain unfamiliar terms in plain language, but do not turn every field or line into a tutorial.
+
 Read [guided-design-and-execution.md](references/guided-design-and-execution.md) when the request is ambiguous, AI-powered, intended for another coding model, or large enough to require staged delivery.
 
 ## Operating boundary
 
 - Generate and save documentation only. Do not modify business code, create migrations, deploy, commit, or change external systems unless the user separately requests implementation.
-- Inspect the repository and its documentation conventions when a repository is available. If no convention exists, use `docs/implementation/`.
+- Inspect the repository and its documentation conventions when a repository is available. If no convention exists, use `docs/implementation/`. Use this evidence priority when sources conflict: runtime behavior and tests, executable code paths, configuration/schema, project documentation, user statements, then inference.
 - Never invent business rules, compliance obligations, SLAs, pricing, retention, or priority from code. Mark them as assumptions or pending decisions.
 - Separate every important claim into `VERIFIED`, `INFERENCE`, or `UNKNOWN`.
-- Ask only questions whose answers materially change scope, architecture, safety, cost, compatibility, or acceptance. Continue with clearly labeled assumptions when safe.
+- Ask only questions whose answers materially change scope, architecture, safety, cost, compatibility, or acceptance. In interactive sessions ask one at a time; in non-interactive sessions group at most three high-impact questions, then continue with clearly labeled assumptions when safe.
 - Treat enterprise-grade as evidence-driven completeness, not automatic distributed-system complexity. Cover operational, security, data, compatibility, and recovery responsibilities that the accepted scope requires; add microservices, queues, complex identity, workflow engines, or other infrastructure only when a committed consumer, scale/risk constraint, or explicit requirement justifies it.
 
 ## Select the analysis mode
@@ -82,7 +92,7 @@ Evaluate, in order: no change; documentation/configuration/process; reuse existi
 
 Cover only applicable dimensions, but do not silently omit them: callers, API/data/event/UI contracts, authorization and privacy, persistence and migrations, retries/idempotency/concurrency, compatibility and performance, operations/observability, deployment, and rollback. Distinguish restored application state from external side effects that cannot be undone.
 
-Every acceptance criterion must contain a scenario, trigger, observable expected result, meaningful prohibited side effect, verification method, safety/environment constraint when relevant, and priority. Replace vague terms such as "correctly", "securely", or "fast" with evidence or label them as human judgment.
+Every acceptance criterion must contain a scenario, trigger, observable expected result, verification method, and priority. Add a meaningful prohibited side effect for criteria involving data, authorization, external calls, persistence, or destructive actions. Add safety/environment constraints when relevant. Replace vague terms such as "correctly", "securely", or "fast" with evidence or label them as human judgment.
 
 ## Choose the output shape
 
@@ -92,6 +102,8 @@ Use the smallest shape that remains implementation-ready:
 - **Medium or large project**: use [large-project-template.md](references/large-project-template.md) and split the deliverable when there are multiple deployable components, persistence/API contracts, migrations, several actors, or enough tasks that one file would be hard to navigate.
 
 Do not split documents merely for appearance. In a split deliverable, create an index and link every document and task dependency.
+
+Use these default output names unless the repository already defines a convention: small projects use `docs/implementation/<project>-blueprint.md`; split deliverables use `docs/implementation/<project>/00-index.md` and the numbered files from the large-project template. Preserve existing documents and use UTF-8.
 
 ## Implementation-ready detail
 
@@ -130,5 +142,10 @@ Before returning the document:
 6. Verify every stage has a run check and an explicit failure stop condition when staged prompts are included.
 7. State the final verdict: `IMPLEMENTABLE`, `REDUCE_SCOPE`, `REVISE_DESIGN`, `NEEDS_EVIDENCE`, or `NO_CHANGE_NEEDED`.
 8. List remaining uncertainty and the exact decision or evidence needed. Do not hide blockers inside prose.
+9. Record the repository revision, generation date, requirements revision when known, and whether lockfiles and deployment configuration were inspected.
+10. In teaching mode, verify that each major decision has a concise business-to-code explanation and a concrete way for the learner to validate it.
 
 The final response should link the generated document(s), summarize the verdict and blockers, and state that no project code was changed.
+
+
+

@@ -144,3 +144,4 @@ Before delivery, verify:
 - future features have change-impact notes without speculative abstractions;
 - every implementation stage has exact files, checks, and a failure stop condition;
 - the final verdict and remaining uncertainty are visible.
+
